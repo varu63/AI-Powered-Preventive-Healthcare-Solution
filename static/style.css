@@ -1,0 +1,93 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the forms */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    margin: 30px auto;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Headings */
+h1 {
+    color: #333;
+}
+
+h2, h3 {
+    color: #555;
+}
+
+/* Input fields and selects */
+input[type="number"], input[type="text"], select {
+    margin: 5px 0;
+    padding: 8px;
+    width: 90%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #007BFF;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Feature fields sections */
+.feature-fields {
+    margin: 20px 0;
+    text-align: left;
+}
+
+/* Scrollable section for long forms (like breast cancer) */
+#breast_fields {
+    max-height: 450px; /* adjust as needed */
+    overflow-y: scroll;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+/* Each input label spacing */
+.feature-fields input, .feature-fields select {
+    display: block;
+    margin: 5px 0 10px 0;
+}
+
+/* Prediction text */
+h2 {
+    margin-top: 20px;
+    color: #d9534f;
+}

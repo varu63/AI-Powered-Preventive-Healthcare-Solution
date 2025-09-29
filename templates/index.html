@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ML Disease Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>ML Disease Predictor</h1>
+    <form action="/predict" method="post">
+        <label>Select Disease:</label>
+        <select id="disease" name="disease" onchange="showFields()">
+            <option value="diabetes">Diabetes</option>
+            <option value="heart">Heart Disease</option>
+            <option value="breast">Breast Cancer</option>
+        </select>
+
+        <!-- Diabetes Fields -->
+        <div id="diabetes_fields" class="feature-fields">
+            <h3>Diabetes Features</h3>
+            Gender: <select name="gender"><option>Male</option><option>Female</option></select><br>
+            Age: <input type="number" name="age"><br>
+            Hypertension: <input type="number" name="hypertension" min="0" max="1"><br>
+            Heart Disease: <input type="number" name="heart_disease" min="0" max="1"><br>
+            Smoking History: <select name="smoking_history"><option>never</option><option>former</option><option>current</option></select><br>
+            BMI: <input type="number" name="bmi" step="0.1"><br>
+            HbA1c: <input type="number" name="hba1c" step="0.1"><br>
+            Blood Glucose: <input type="number" name="glucose" step="1"><br>
+        </div>
+
+        <!-- Heart Disease Fields -->
+        <div id="heart_fields" class="feature-fields" style="display:none;">
+            <h3>Heart Disease Features</h3>
+            Sex: <select name="sex"><option>Male</option><option>Female</option></select><br>
+            Age: <input type="number" name="age"><br>
+            CP: <input type="number" name="cp"><br>
+            Resting BP: <input type="number" name="trestbps"><br>
+            Cholesterol: <input type="number" name="chol"><br>
+            Fasting Blood Sugar: <input type="number" name="fbs"><br>
+            Rest ECG: <input type="number" name="restecg"><br>
+            Max Heart Rate: <input type="number" name="thalach"><br>
+            Exang: <input type="number" name="exang"><br>
+            Oldpeak: <input type="number" name="oldpeak" step="0.1"><br>
+            Slope: <input type="number" name="slope"><br>
+            CA: <input type="number" name="ca"><br>
+            Thal: <input type="number" name="thal"><br>
+        </div>
+
+        <!-- Breast Cancer Fields (show some as example, extend as needed) -->
+        <div id="breast_fields" class="feature-fields" style="display:none;">
+    <h3>Breast Cancer Features</h3>
+    
+    Diagnosis (M/B): <input type="text" name="diagnosis" step="0.01" maxlength="1"><br>
+
+    Radius Mean: <input type="number" name="radius_mean" step="0.01"><br>
+    Texture Mean: <input type="number" name="texture_mean" step="0.01"><br>
+    Perimeter Mean: <input type="number" name="perimeter_mean" step="0.01"><br>
+    Area Mean: <input type="number" name="area_mean" step="0.01"><br>
+    Smoothness Mean: <input type="number" name="smoothness_mean" step="0.001"><br>
+    Compactness Mean: <input type="number" name="compactness_mean" step="0.001"><br>
+    Concavity Mean: <input type="number" name="concavity_mean" step="0.001"><br>
+    Concave Points Mean: <input type="number" name="concave_points_mean" step="0.001"><br>
+    Symmetry Mean: <input type="number" name="symmetry_mean" step="0.001"><br>
+    Fractal Dimension Mean: <input type="number" name="fractal_dimension_mean" step="0.001"><br>
+
+    Radius SE: <input type="number" name="radius_se" step="0.001"><br>
+    Texture SE: <input type="number" name="texture_se" step="0.001"><br>
+    Perimeter SE: <input type="number" name="perimeter_se" step="0.001"><br>
+    Area SE: <input type="number" name="area_se" step="0.001"><br>
+    Smoothness SE: <input type="number" name="smoothness_se" step="0.001"><br>
+    Compactness SE: <input type="number" name="compactness_se" step="0.001"><br>
+    Concavity SE: <input type="number" name="concavity_se" step="0.001"><br>
+    Concave Points SE: <input type="number" name="concave_points_se" step="0.001"><br>
+    Symmetry SE: <input type="number" name="symmetry_se" step="0.001"><br>
+    Fractal Dimension SE: <input type="number" name="fractal_dimension_se" step="0.001"><br>
+
+    Radius Worst: <input type="number" name="radius_worst" step="0.001"><br>
+    Texture Worst: <input type="number" name="texture_worst" step="0.001"><br>
+    Perimeter Worst: <input type="number" name="perimeter_worst" step="0.001"><br>
+    Area Worst: <input type="number" name="area_worst" step="0.001"><br>
+    Smoothness Worst: <input type="number" name="smoothness_worst" step="0.001"><br>
+    Compactness Worst: <input type="number" name="compactness_worst" step="0.001"><br>
+    Concavity Worst: <input type="number" name="concavity_worst" step="0.001"><br>
+    Concave Points Worst: <input type="number" name="concave_points_worst" step="0.001"><br>
+    Symmetry Worst: <input type="number" name="symmetry_worst" step="0.001"><br>
+    Fractal Dimension Worst: <input type="number" name="fractal_dimension_worst" step="0.001"><br>
+</div>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+    <a href="{{ url_for('disease_tests') }}">See Recommended Tests</a>
+    
+</div>
+
+<script>
+function showFields() {
+    var disease = document.getElementById('disease').value;
+    document.getElementById('diabetes_fields').style.display = disease=='diabetes' ? 'block':'none';
+    document.getElementById('heart_fields').style.display = disease=='heart' ? 'block':'none';
+    document.getElementById('breast_fields').style.display = disease=='breast' ? 'block':'none';
+}
+</script>
+</body>
+</html>
