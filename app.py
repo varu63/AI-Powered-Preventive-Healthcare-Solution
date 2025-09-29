@@ -37,21 +37,27 @@ def predict():
 
     # Collect features depending on disease
     if disease == "heart":
-        features = [
-            float(request.form['age']),
-            1 if request.form['sex'] == 'Male' else 0,
-            int(request.form['cp']),
-            float(request.form['trestbps']),
-            float(request.form['chol']),
-            int(request.form['fbs']),
-            int(request.form['restecg']),
-            float(request.form['thalach']),
-            int(request.form['exang']),
-            float(request.form['oldpeak']),
-            int(request.form['slope']),
-            int(request.form['ca']),
-            int(request.form['thal'])
-        ]
+        try:
+            age = get_float_value(request.form, 'age')
+            sex = 1 if request.form.get('sex') == 'Male' else 0
+            cp = int(request.form.get('cp', 0))
+            trestbps = get_float_value(request.form, 'trestbps')
+            chol = get_float_value(request.form, 'chol')
+            fbs = int(request.form.get('fbs', 0))
+            restecg = int(request.form.get('restecg', 0))
+            thalach = get_float_value(request.form, 'thalach')
+            exang = int(request.form.get('exang', 0))
+            oldpeak = get_float_value(request.form, 'oldpeak')
+            slope = int(request.form.get('slope', 0))
+            ca = int(request.form.get('ca', 0))
+            thal = int(request.form.get('thal', 0))
+            features = [age, sex, cp, trestbps, chol, fbs,
+                    restecg, thalach, exang, oldpeak,
+                    slope, ca, thal]
+            
+            
+        except Exception as e:
+            return f"Error: {str(e)}"
         model = heart_model
 
     elif disease == "diabetes":
@@ -120,5 +126,15 @@ def predict():
 def disease_tests():
     return render_template('test.html', tests=tests)
 
+def get_float_value(form, key, default=0.0):
+    value = form.get(key, "").strip()
+    if value == "":
+        return default  # or raise an error
+    try:
+        return float(value)
+    except ValueError:
+        return default
+
 if __name__ == "__main__":
     app.run(debug=True)
+
