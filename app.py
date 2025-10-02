@@ -134,7 +134,10 @@ def get_float_value(form, key, default=0.0):
         return float(value)
     except ValueError:
         return default
-
+        
 if __name__ == "__main__":
-    app.run(debug=True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
+
+
 
